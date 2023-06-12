@@ -1,6 +1,9 @@
 from django.db import models
+from django.urls import reverse
+
 
 class Women(models.Model):
+    id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
@@ -10,3 +13,6 @@ class Women(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('post', kwargs={'post_id': self.pk})
